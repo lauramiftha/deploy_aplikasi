@@ -31,7 +31,7 @@ mysql = MySQL(app)
 
 # Model config
 IMG_SIZE = (128, 128)
-MODEL_PATH = os.path.join(os.getcwd(), "best_model_0.97.h5")
+MODEL_PATH = os.path.join(os.getcwd(), "best_model.tflite")
 class_labels = ["Bercak Daun", "Embun Jelaga", "Karat Daun", "Sehat"]
 
 def build_model():
