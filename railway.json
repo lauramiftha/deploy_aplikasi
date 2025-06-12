@@ -1,0 +1,11 @@
+{
+  "build": {
+    "nixpacksConfig": {
+      "phases": {
+        "setup": {
+          "nixpkgs": ["python3", "python3Full", "python3Packages.setuptools", "python3Packages.distutils_extra"]
+        }
+      }
+    }
+  }
+}
