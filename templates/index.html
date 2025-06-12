@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("/static/images/background.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #1b5e20;
+            text-align: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background: rgba(46, 125, 50, 0.9); /* transparan agar background tetap terlihat */
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar a:hover {
+            color: #a5d6a7;
+        }
+
+        .container {
+            margin-top: 120px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* transparan putih agar teks tetap terbaca */
+            border-radius: 15px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #1b5e20;
+        }
+
+        p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #2e7d32;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background: #388e3c;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #1b5e20;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="/"><i class="fas fa-home"></i> Beranda</a>
+        <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="/register"><i class="fas fa-user-plus"></i> Daftar</a>
+        <a href="/layanan"><i class="fas fa-cogs"></i> Klasifikasi</a>
+        <a href="/about"><i class="fas fa-info-circle"></i> Informasi</a>
+    </div>
+
+    <div class="container">
+        <h2><i class="fas fa-seedling"></i> Selamat Datang di Aplikasi Identifikasi Jambu Kristal</h2>
+        <p>Gunakan teknologi AI untuk mengidentifikasi kondisi penyakit pada daun jambu kristal dengan cepat dan akurat.</p>
+        <a href="/layanan" class="btn"><i class="fas fa-arrow-right"></i> Mulai Sekarang</a>
+    </div>
+
+</body>
+</html>

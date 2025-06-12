@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Klasifikasi Daun Jambu Kristal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f3fef7;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding: 40px 20px;
+    }
+    .container {
+      background: white;
+      max-width: 650px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    header h2 {
+      color: #2e7d32;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-logout {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .btn-logout:hover {
+      background-color: #c62828;
+    }
+    .note {
+      background: #edf7ed;
+      padding: 15px;
+      border-left: 5px solid #66bb6a;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: #33691e;
+      margin-bottom: 25px;
+    }
+    .upload-area {
+      border: 2px dashed #43a047;
+      border-radius: 16px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #f0fdf4;
+      position: relative;
+    }
+    .upload-area.dragover {
+      background: #e0f2f1;
+      border-color: #2e7d32;
+    }
+    .upload-area i {
+      font-size: 60px;
+      color: #2e7d32;
+    }
+    .upload-area p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: #2e7d32;
+    }
+    #imagePreview {
+      display: none;
+      margin-top: 20px;
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background-color: #43a047;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      background-color: #2e7d32;
+    }
+    .btn-reset {
+      background-color: #9e9e9e;
+    }
+    .btn-reset:hover {
+      background-color: #616161;
+    }
+    .result {
+      margin-top: 30px;
+      background: #f1f8f5;
+      border-left: 5px solid #4caf50;
+      padding: 20px;
+      border-radius: 12px;
+      display: none;
+    }
+    .visualizations {
+      margin-top: 25px;
+      display: none;
+    }
+    .visualizations h4 {
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+    .visualizations img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      border-radius: 14px;
+      border: 1px solid #c8e6c9;
+      margin-bottom: 15px;
+    }
+    #featuremapContainer {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+    }
+    #featuremapContainer div {
+      text-align: center;
+    }
+    .loader {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .loader span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin: 0 3px;
+      background: #43a047;
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out both;
+    }
+    .loader span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .loader span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    @keyframes bounce {
+      0%, 80%, 100% {
+        transform: scale(0);
+      }
+      40% {
+        transform: scale(1);
+      }
+    }
+    @media (max-width: 480px) {
+      .upload-area {
+        padding: 30px 15px;
+      }
+      .btn {
+        font-size: 0.95rem;
+      }
+      header h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h2><i class="fas fa-leaf"></i> Prediksi Daun Jambu Kristal</h2>
+      <button class="btn-logout" onclick="window.location.href='/logout'">Keluar</button>
+    </header>
+
+    <section class="note">
+      Gunakan gambar <strong>satu daun</strong> dengan latar belakang bersih dan kontras tinggi. Hindari bayangan, tangan, atau daun lain.
+    </section>
+
+    <section class="upload-area" id="uploadArea" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+      <i id="uploadIcon" class="fas fa-cloud-upload-alt"></i>
+      <p id="uploadText">Klik atau seret gambar ke sini</p>
+      <img id="imagePreview" alt="Preview Gambar">
+      <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)">
+    </section>
+
+    <button class="btn" onclick="uploadImage()">
+      <i class="fas fa-search"></i> Prediksi
+    </button>
+    <button class="btn btn-reset" onclick="resetImage()">
+      <i class="fas fa-sync-alt"></i> Ganti Gambar
+    </button>
+
+    <div class="loader" id="loader">
+      <span></span><span></span><span></span>
+    </div>
+
+    <section id="resultContainer" class="result">
+      <h3>Hasil Prediksi</h3>
+      <p><strong>Prediksi Daun:</strong> <span id="prediction"></span></p>
+      <p><strong>Confidence:</strong> <span id="confidence"></span></p>
+      <p><strong>Penjelasan:</strong> <span id="diseaseExplanation" style="display: none;"></span></p>
+    </section>
+
+    <section id="visualizations" class="visualizations">
+      <h4>Grad-CAM</h4>
+      <img id="gradcamImg" alt="Grad-CAM">
+      <h4>Feature Maps</h4>
+      <div id="featuremapContainer"></div>
+    </section>
+  </main>
+
+  <script>
+    function triggerFileInput() {
+      document.getElementById('fileInput').click();
+    }
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('imagePreview').src = e.target.result;
+          document.getElementById('imagePreview').style.display = 'block';
+          document.getElementById('uploadText').style.display = 'none';
+          document.getElementById('uploadIcon').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function resetImage() {
+      document.getElementById('imagePreview').src = "";
+      document.getElementById('imagePreview').style.display = "none";
+      document.getElementById('uploadText').style.display = 'block';
+      document.getElementById('uploadIcon').style.display = 'block';
+      document.getElementById('fileInput').value = "";
+      document.getElementById('resultContainer').style.display = 'none';
+      document.getElementById('visualizations').style.display = 'none';
+    }
+
+    function handleDragOver(event) {
+      event.preventDefault();
+      document.getElementById("uploadArea").classList.add("dragover");
+    }
+
+    function handleDragLeave(event) {
+      event.preventDefault();
+      document.getElementById("uploadArea").classList.remove("dragover");
+    }
+
+    function handleDrop(event) {
+      event.preventDefault();
+      document.getElementById("uploadArea").classList.remove("dragover");
+      const fileInput = document.getElementById('fileInput');
+      fileInput.files = event.dataTransfer.files;
+      previewImage({ target: fileInput });
+    }
+
+    function showDiseaseExplanation(prediction) {
+      const info = {
+         "Bercak Daun": "Bercak Daun disebabkan oleh jamur Cercospora psidii. Gejalanya berupa bercak bulat yang menyebar ditandai dengan warna kuning/coklat/hitam pada daun, mengganggu fotosintesis, dan bisa menyebabkan daun rontok.",
+         "Karat Daun": "Karat Daun disebabkan oleh ganggang Cephaleuros virescens, ditandai dengan serbuk oranye seperti karat di daun bagian bawah. Dapat menyebabkan daun mengering dan rontok.",
+         "Embun Jelaga": "Embun Jelaga disebabkan oleh jamur Capnodium spp yang tumbuh di cairan manis dari hama. Membentuk lapisan hitam di daun dan menghambat fotosintesis.",
+         "Daun Sehat": "Daun sehat tidak menunjukkan gejala penyakit. Warna hijau merata tanpa bercak atau lapisan hitam."
+      };
+      const explainElem = document.getElementById("diseaseExplanation");
+      explainElem.innerText = info[prediction] || "Tidak ada informasi tambahan.";
+      explainElem.style.display = "block";
+    }
+
+    async function uploadImage() {
+      const fileInput = document.getElementById('fileInput');
+      if (fileInput.files.length === 0) {
+        alert("Silakan pilih gambar terlebih dahulu!");
+        return;
+      }
+
+      const loader = document.getElementById('loader');
+      loader.style.display = 'block';
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+
+      try {
+        const response = await fetch("/predict", {
+          method: "POST",
+          body: formData
+        });
+        const data = await response.json();
+
+        loader.style.display = 'none';
+
+        if (data.error) {
+          alert("Terjadi kesalahan: " + data.error);
+          return;
+        }
+
+        document.getElementById("prediction").innerText = data.prediction;
+        document.getElementById("confidence").innerText = data.confidence + "%";
+        document.getElementById("resultContainer").style.display = "block";
+        showDiseaseExplanation(data.prediction);
+        document.getElementById("gradcamImg").src = "data:image/jpeg;base64," + data.gradcam_base64;
+
+        const featuremapContainer = document.getElementById("featuremapContainer");
+        featuremapContainer.innerHTML = "";
+        data.feature_maps.forEach(fmap => {
+          const div = document.createElement("div");
+          const p = document.createElement("p");
+          p.textContent = fmap.layer;
+          const img = document.createElement("img");
+          img.src = "data:image/png;base64," + fmap.image_base64;
+          div.appendChild(p);
+          div.appendChild(img);
+          featuremapContainer.appendChild(div);
+        });
+
+        document.getElementById("visualizations").style.display = "block";
+      } catch (error) {
+        loader.style.display = 'none';
+        alert("Gagal mengunggah gambar.");
+      }
+    }
+  </script>
+</body>
+</html>

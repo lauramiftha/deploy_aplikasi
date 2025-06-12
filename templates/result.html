@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Prediksi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        img { max-width: 100%; height: auto; }
+        .container { padding: 20px; }
+        .feature-map { margin: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hasil Deteksi Penyakit Daun Jambu Kristal</h2>
+        <p><strong>Kelas:</strong> {{ prediction }}</p>
+        <p><strong>Akurasi:</strong> {{ confidence }}%</p>
+        <h3>Grad-CAM</h3>
+        <img src="{{ image_path }}" alt="Hasil Grad-CAM">
+        <h3>Feature Maps</h3>
+        {% for layer, path in feature_maps %}
+            <div class="feature-map">
+                <p><strong>{{ layer }}</strong></p>
+                <img src="{{ path }}" alt="Feature map {{ layer }}">
+            </div>
+        {% endfor %}
+        <br>
+        <a href="{{ url_for('layanan') }}">← Kembali ke Layanan</a>
+    </div>
+</body>
+</html>

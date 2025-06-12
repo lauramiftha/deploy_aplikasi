@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Informasi Aplikasi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #1b5e20, #4caf50);
+      color: #1b5e20;
+      text-align: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+      margin: 50px auto;
+    }
+
+    h2 {
+      color: #2e7d32;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.7;
+      color: #388e3c;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      color: #1b5e20;
+      margin-top: 30px;
+    }
+
+    img {
+  max-width: 80%;
+  height: auto;
+  max-height: 250px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      font-size: 1em;
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .back-button:hover {
+      background-color: #1b5e20;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2><i class="fas fa-info-circle"></i> Tentang Aplikasi</h2>
+    <p>
+      Aplikasi ini dirancang untuk membantu pengguna, khususnya petani jambu kristal, dalam mengidentifikasi penyakit daun secara otomatis menggunakan teknologi <strong>Convolutional Neural Network (CNN)</strong>. Sistem mampu mengenali tiga jenis penyakit utama serta kondisi daun sehat.
+    </p>
+
+    <h3>Bercak Daun (Leaf Spot)</h3>
+    <img src="/static/images/bercak_daun.jpeg" alt="Bercak Daun">
+    <p>
+      Ditandai dengan bercak coklat hingga hitam yang tidak beraturan. Penyakit ini disebabkan oleh jamur <em>Cercospora psidii</em>. Lesi berkembang dari warna kuning kehitaman, diameter 2 sampai 10 mm. Mengganggu fotosintesis dan menyebabkan daun rontok lebih awal.
+    </p>
+
+    <h3>Karat Daun / Karat Merah</h3>
+    <img src="/static/images/karat_daun.jpeg" alt="Karat Daun">
+    <p>
+      Disebabkan oleh alga parasit <em>Cephaleuros virescens</em>. Gejalanya berupa serbuk berwarna oranye kemerahan di permukaan bawah daun. Muncul saat musim hujan dan bisa menyebabkan daun mengering dan gugur.
+    </p>
+
+    <h3>Embun Jelaga</h3>
+    <img src="/static/images/embun_jelaga.jpeg" alt="Embun Jelaga">
+    <p>
+      Lapisan hitam pekat yang menutupi permukaan daun, batang, atau buah. Disebabkan oleh jamur <em>Capnodium spp.</em> yang tumbuh pada eksudat kutu daun. Menghambat cahaya masuk dan menurunkan fotosintesis.
+    </p>
+
+    <h3>Daun Sehat</h3>
+    <img src="/static/images/daun_sehat.jpeg" alt="Daun Sehat">
+    <p>
+      Daun sehat berwarna hijau cerah, tanpa bercak atau lapisan hitam. Memiliki bentuk utuh dan mendukung fotosintesis secara optimal.
+    </p>
+
+    <a href="{{ url_for('index') }}" class="back-button"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
+  </div>
+</body>
+</html>

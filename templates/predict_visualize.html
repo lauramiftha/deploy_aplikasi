@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualisasi Prediksi Penyakit Daun</title>
+</head>
+<body>
+    <h1>Deteksi Penyakit Daun Jambu Kristal - Visualisasi Per Layer</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload dan Deteksi</button>
+    </form>
+    <hr>
+
+    {% if input_img %}
+    <h2>Gambar Input:</h2>
+    <img src="{{ url_for('static', filename=input_img) }}" width="300">
+
+    <h2>Visualisasi Feature Maps Tiap Layer:</h2>
+    {% for layer_name, fmap in fmap_paths %}
+        <div style="margin-bottom:20px;">
+            <h3>Layer: {{ layer_name }}</h3>
+            <img src="{{ url_for('static', filename=fmap) }}" width="700">
+        </div>
+    {% endfor %}
+
+    <h2>Grad-CAM Output:</h2>
+    <img src="{{ url_for('static', filename=gradcam_path) }}" width="400">
+
+    <h2>Hasil Prediksi:</h2>
+    <p>Kelas: <b>{{ predicted_class }}</b></p>
+    <p>Confidence: <b>{{ confidence }}%</b></p>
+    {% endif %}
+
+    <p><a href="{{ url_for('layanan') }}">Kembali ke Layanan</a></p>
+</body>
+</html>
