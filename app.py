@@ -16,6 +16,7 @@ import matplotlib
 matplotlib.use('Agg')
 import base64
 import io
+import gdown
 
 # Flask app init
 app = Flask(__name__)
@@ -32,7 +33,12 @@ mysql = MySQL(app)
 # Model config
 IMG_SIZE = (128, 128)
 MODEL_PATH = os.path.join(os.getcwd(), "best_model_0.97.h5")
+DRIVE_URL = "https://drive.google.com/uc?id=1GDC_rCtHnuUH2XhSO8kyfOvoP3cyGsz8"
 class_labels = ["Bercak Daun", "Embun Jelaga", "Karat Daun", "Sehat"]
+
+if not os.path.exists(MODEL_PATH):
+    print("Mengunduh model dari Google Drive...")
+    gdown.download(DRIVE_URL, MODEL_PATH, quiet=False)
 
 def build_model():
     model = Sequential([
